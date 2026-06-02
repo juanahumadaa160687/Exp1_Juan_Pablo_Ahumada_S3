@@ -73,23 +73,56 @@
         <h2 class="card-title mb-4 text-center">Crear Cuenta</h2>
         <form>
           <div class="mb-3">
+            <label for="nombres" class="form-label">Nombres</label>
+            <input type="text" class="form-control" id="nombres" placeholder="Ingresa tus nombres" name="nombres">
+            <div class="valid-feedback" id="nombre_feedback">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" placeholder="Ingresa tus apellidos" name="apellidos">
+            <div class="valid-feedback" id="apellidos_feedback">
+            </div>
+          </div>
+          <div class="mb-3">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Ingresa tu usuario">
+            <input type="text" class="form-control" id="username" placeholder="Ingresa tu nombre de usuario" name="username">
+            <div class="valid-feedback" id="username_feedback">
+            </div>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">Correo Electrónico</label>
-            <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico">
+            <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo electrónico" name="email">
+            <div class="valid-feedback" id="email_feedback">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento">
+            <div class="valid-feedback" id="fecha_nacimiento_feedback">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección de Despacho (Opcional)</label>
+            <input type="text" class="form-control" id="direccion" placeholder="Ingresa tu dirección de despacho" name="direccion">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Contraseña</label>
             <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+            <div class="valid-feedback" id="password_feedback">
+            </div>
           </div>
           <div class="mb-3">
             <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
             <input type="password" class="form-control" id="confirmPassword" placeholder="Confirma tu contraseña">
+            <div class="valid-feedback" id="confirmPassword_feedback">
+            </div>
           </div>
           <div class="mb-3">
             <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+          </div>
+          <div class="mb-3">
+            <button type="button" class="btn btn-primary w-100" id="limpiar">Limpiar</button>
           </div>
         </form>
 
