@@ -59,6 +59,7 @@ main{
 
 .navbar{
     background-color: var(--cffy-theme-surface-a10);
+    margin-bottom: 30px;
 }
 
 .nav-link{
@@ -144,6 +145,10 @@ footer{
     }
 }
 
+.card:hover{
+    scale: 1.05;
+}
+
 @keyframes card_anim {
     0% {
         opacity: 0;
@@ -164,7 +169,6 @@ footer{
         color: var(--cffy-theme-primary-a40);
     }
 }
-
 
 label{
     color: var(--cffy-theme-primary-a40);
@@ -187,7 +191,7 @@ form{
         border: none;
         border-radius: 10px;
         width: 60%;
-        color: var(--cffy-theme-primary-a50);
+        color: #fff;
 
     }
 }
@@ -202,4 +206,31 @@ form{
 
 .terminos-condiciones{
     color: var(--cffy-theme-primary-a40);
+}
+
+#forgot_password{
+    a{
+        color: var(--cffy-theme-primary-a20);
+    }
+}
+
+button{
+    background-color: var(--cffy-theme-primary-a0);
+    border: none;
+    border-radius: 10px;
+    width: 60%;
+    color: #fff;
+
+}
+
+#logout{
+    visibility: hidden;
+}
+
+#profile{
+    visibility: hidden;
+}
+
+#login{
+    visibility: hidden;
 }

@@ -2,33 +2,47 @@ let form = document.getElementById("login");
 let feedback_username = document.getElementById("feedback_username");
 let feedback_password = document.getElementById("feedback_password");
 
-let boton_submit = document.getElementById("boton_submit");
-
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
-    if (username === "") {
-        feedback_username.classList.remove("valid-feedback");
-        feedback_username.classList.add("invalid-feedback");
+    let users = JSON.parse(localStorage.getItem("user " + username));
 
-        feedback_username.innerText = "El nombre de usuario no puede estar vacío.";
+    if (users.length === 0) {
+        feedback_username.innerHTML = "El usuario no existe.";
         feedback_username.style.display = "block";
-    }
 
-    else if (password === "" || password.length < 8) {
-        feedback_password.classList.remove("valid-feedback");
-        feedback_password.classList.add("invalid-feedback");
-
-        feedback_password.innerText = "La contraseña no puede estar vacía o debe tener al menos 8 caracteres.";
-        feedback_password.style.display = "block";
+        setTimeout(() => {
+            feedback_username.style.display = "none";
+        }, 3500);
     }
 
     else {
-        form.submit();
-        form.reset();
+        for (let i = 0; i < users.length; i++) {
+            let user_username = users[i].username;
+            let user_password = users[i].password;
+
+            if (username === user_username && password === user_password) {
+
+                sessionStorage.setItem("username", username);
+                sessionStorage.setItem("password", password);
+
+                window.location.href = "/ludus_arcanus_web/index.html";
+                return;
+            }
+            else {
+                feedback_password.innerText = "Contraseña incorrectas.";
+                feedback_password.style.display = "block";
+
+                setTimeout(() => {
+                    feedback_username.style.display = "none";
+                }, 3500);
+            }
+        }
     }
 
+
 })
+
