@@ -11,15 +11,17 @@ let password_confirmation = document.getElementById("confirmPassword_feedback");
 signUpForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    let nombre = document.getElementById("nombre").value;
-    let apellido = document.getElementById("apellido").value;
-    let username = document.getElementById("username").value;
-    let email = document.getElementById("email").value;
-    let fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
-    let direccion = document.getElementById("direccion").value;
-    let password = document.getElementById("password").value;
-    let confirmacion = document.getElementById("confirmPassword").value;
+    let nombre = document.getElementById("nombre").value.trim();
+    let apellido = document.getElementById("apellido").value.trim();
+    let username = document.getElementById("username").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let fecha_nacimiento = document.getElementById("fecha_nacimiento").value.trim();
+    let direccion = document.getElementById("direccion").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let confirmacion = document.getElementById("confirmPassword").value.trim();
+    let role = document.getElementById("role").value.trim();
 
+    let user = JSON.parse(localStorage.getItem("user " + username));
 
     if (nombre === "") {
         nombre_feedback.innerText = "El nombre no puede estar vacío.";
@@ -46,6 +48,13 @@ signUpForm.addEventListener("submit", function (event) {
             nombre_feedback.style.display = "none";
         }, 3500);
     }
+    else if (username === user.username) {
+        username_feedback.innerText = "El nombre de usuario ya existe. Por favor, elige otro.";
+        username_feedback.style.display = "block";
+        setTimeout(() => {
+            nombre_feedback.style.display = "none";
+        }, 3500);
+    }
     else if (email === "") {
         email_feedback.innerText = "El email no valido";
         email_feedback.style.display = "block";
@@ -55,6 +64,13 @@ signUpForm.addEventListener("submit", function (event) {
     }
     else if (!email.includes("@") || !email.includes(".")) {
         email_feedback.innerText = "El email no es válido.";
+        email_feedback.style.display = "block";
+        setTimeout(() => {
+            email_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (email === user.email) {
+        email_feedback.innerText = "El email ya está registrado. Por favor, elige otro.";
         email_feedback.style.display = "block";
         setTimeout(() => {
             email_feedback.style.display = "none";
@@ -111,11 +127,12 @@ signUpForm.addEventListener("submit", function (event) {
             fecha_nacimiento: fecha_nacimiento,
             direction: direccion,
             password: password,
+            role: role
         }
 
         localStorage.setItem("user " + username, JSON.stringify(userPofile));
 
-        alert("¡Registro exitoso! Bienvenido " + nombre + " a Ludus Arcanus.");
+        alert("Registro exitoso. Ahora puedes iniciar sesión.");
 
         window.location.href = "/ludus_arcanus_web/login.html";
     }

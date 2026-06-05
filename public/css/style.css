@@ -234,3 +234,28 @@ button{
 #login{
     visibility: hidden;
 }
+
+#dashboard{
+    visibility: hidden;
+}
+
+#registro_form{
+    color: var(--cffy-theme-primary-a40);
+}
+
+.limpiar{
+    background-color: var(--cffy-theme-surface-a10);
+
+}
+
+#sign_in{
+    color: var(--cffy-theme-primary-a40);
+}
+
+th td{
+    color: var(--cffy-theme-primary-a40);
+}
+
+#prof{
+    color: var(--cffy-theme-primary-a40);
+}

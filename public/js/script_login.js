@@ -5,13 +5,13 @@ let feedback_password = document.getElementById("feedback_password");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
 
     let users = JSON.parse(localStorage.getItem("user " + username));
 
     if (users.length === 0) {
-        feedback_username.innerHTML = "El usuario no existe.";
+        feedback_username.innerHTML = "El usuario no existe. Intenta nuevamente o registrate";
         feedback_username.style.display = "block";
 
         setTimeout(() => {
@@ -23,17 +23,19 @@ form.addEventListener("submit", (e) => {
         for (let i = 0; i < users.length; i++) {
             let user_username = users[i].username;
             let user_password = users[i].password;
+            let user_role = users[i].role;
 
             if (username === user_username && password === user_password) {
 
-                sessionStorage.setItem("username", username);
-                sessionStorage.setItem("password", password);
+                sessionStorage.setItem("username", user_username);
+                sessionStorage.setItem("password", user_password);
+                sessionStorage.setItem("role", user_role);
 
                 window.location.href = "/ludus_arcanus_web/index.html";
                 return;
             }
             else {
-                feedback_password.innerText = "Contraseña incorrectas.";
+                feedback_password.innerText = "Contraseña incorrecta. Intenta nuevamente";
                 feedback_password.style.display = "block";
 
                 setTimeout(() => {
@@ -42,7 +44,6 @@ form.addEventListener("submit", (e) => {
             }
         }
     }
-
 
 })
 
