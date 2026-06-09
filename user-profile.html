@@ -52,7 +52,9 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="carrito.html" tabindex="-1" aria-disabled="true"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="nav-link position-relative" href="carrito.html" tabindex="-1" id="carrito_compras">
+                                <i class="fa fa-shopping-cart" id="icono_carro"></i>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="login.html" tabindex="-1" id="login">Iniciar Sesión</a>
@@ -74,38 +76,45 @@
 
     <main>
         <div class="container d-flex justify-content-center align-items-center" style="min-height: 60vh;">
-            <div class="p-4" id="prof" style="width: 100%; max-width: 800px;">
-                <div class="container title p-1 mb-5 d-flex justify-content-start align-items-center">
+            <div class="row p-4 d-flex flex-column" id="prof" style="width: 100%;">
+                <div class="col-md-12 container title p-1 mb-5 d-flex justify-content-start align-items-center">
                     <h2>Perfil de Usuario</h2>
                 </div>
-
-                <div class="mb-3 mt-3">
-                    <label for="nombre" class="form-label">Nombre:</label>
-                    <input type="text" class="form-control-plaintext" id="nombre" value="" name="nombre" readonly>
+                <br>
+                <div class="col-md-12 d-flex justify-content-center align-items-start flex-column">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row" style="color: var(--cffy-theme-primary-a40)"><strong>Nombre:</strong></th>
+                                <td id="nombre" style="color: var(--cffy-theme-primary-a40)"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="color: var(--cffy-theme-primary-a40)"><strong>Apellido:</strong></th>
+                                <td id="apellido" style="color: var(--cffy-theme-primary-a40)"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="color: var(--cffy-theme-primary-a40)"><strong>Username:</strong></th>
+                                <td id="username" style="color: var(--cffy-theme-primary-a40)"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="color: var(--cffy-theme-primary-a40)"><strong>Correo Electrónico:</strong></th>
+                                <td id="email" style="color: var(--cffy-theme-primary-a40)"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="color: var(--cffy-theme-primary-a40)">Dirección de Envío:</th>
+                                <td id="direccion" style="color: var(--cffy-theme-primary-a40)"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" style="color: var(--cffy-theme-primary-a40)"v>Fecha de Nacimiento:</th>
+                                <td id="fecha_nacimiento" style="color: var(--cffy-theme-primary-a40)"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="mb-3">
-                    <label for="apellido" class="form-label">Apellido:</label>
-                    <input type="text" class="form-control-plaintext" id="apellido" name="apellido" value="" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username:</label>
-                    <input type="text" class="form-control-plaintext" id="username" name="username" value="" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Correo Electrónico:</label>
-                    <input type="email" class="form-control-plaintext" id="email" value="" readonly>
-                </div>
-                <div class="mb-3">
-                    <label for="direccion" class="form-label">Dirección:</label>
-                    <input type="text" class="form-control-plaintext" id="direccion" name="direccion" value="" readonly>
-                </div>
-                <div class="mb-5">
-                    <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento:</label>
-                    <input type="text" class="form-control-plaintext" id="fecha_nacimiento" name="fecha_nacimiento" value="" readonly>
-                </div>
-                <div class="mb-3 d-flex justify-content-around">
+                <br>
+                <div class="d-flex justify-content-around align-items-center gap-4">
                     <button class="btn btn-primary btn-sm" id="b_pass" style="width: 25%"><i class="fa fa-key"></i> Recuperar Contraseña</button>
-                    <button class="btn btn-danger btn-sm" id="b_borrar" style="width: 20%"><i class="fa fa-trash"></i> Eliminar Cuenta</button>
+                    <button class="btn btn-danger btn-sm" id="b_borrar" style="width: 25%"><i class="fa fa-trash"></i> Eliminar Cuenta</button>
                 </div>
             </div>
         </div>

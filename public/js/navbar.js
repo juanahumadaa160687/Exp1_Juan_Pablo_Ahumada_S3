@@ -33,4 +33,24 @@ logout.addEventListener("click", function () {
     logout.style.display = "none";
     profile.style.display = "none";
 
+    window.location.href = "index.html";
+
 });
+
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+if (carrito.length > 0){
+    let carrito_compras = document.getElementById('carrito_compras');
+
+    let badge = document.createElement('span');
+    badge.classList.add('badge', 'bg-danger', 'position-absolute', 'top-3', 'start-100', 'translate-middle', 'rounded-circle', 'border', 'border-light');
+    badge.innerText = carrito.length.toString();
+
+    let badge_2 = document.createElement('span');
+    badge_2.classList.add('visually-hidden');
+    badge_2.innerText = 'Productos en el carrito';
+    badge.appendChild(badge_2);
+
+    carrito_compras.appendChild(badge);
+
+}

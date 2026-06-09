@@ -7,8 +7,6 @@ let emailVerify = document.getElementById("email_feedback");
 forgotPassword.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    let user = JSON.parse(localStorage.getItem("user " + sessionStorage.getItem("username")));
-
     let user_email = document.getElementById("email").value;
 
     if (user_email === "") {
@@ -31,20 +29,10 @@ forgotPassword.addEventListener("submit", (e) => {
         },3500)
     }
 
-    else if (user_email !== user.email) {
-        emailVerify.innerText = "El correo electrónico ingresado no coincide con el registrado en la cuenta.";
-        emailVerify.style.display = "block";
-
-        setTimeout(() => {
-            emailVerify.style.display = "none";
-            forgotPassword.reset();
-        }, 3500)
-    }
-
     else {
         sendForgotPasswordEmail(user_email);
         alert("Se ha enviado un correo electrónico con las instrucciones para restablecer tu contraseña. Por favor, revisa tu bandeja de entrada.");
-        forgotPassword.reset();
+        window.location.href = "restart_password.html";
     }
 })
 

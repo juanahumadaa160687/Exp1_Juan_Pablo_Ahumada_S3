@@ -10,11 +10,7 @@ form_pass.addEventListener("submit", function (event) {
 
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    console.log(users);
-
-    let user = users.find(u => u.username === sessionStorage.username);
-
-    console.log(user);
+    let user = users.find(u => u.username == sessionStorage.username);
 
     if (new_password !== confirm_new_password) {
         confirm_password_feed.innerText = "Las contraseñas no coinciden.";
@@ -58,9 +54,7 @@ form_pass.addEventListener("submit", function (event) {
             password: new_password,
         }
 
-        console.log(new_user);
-
-        users.remove(user);
+        users.splice(users.indexOf(user), 1);
 
         users.push(new_user);
 
@@ -68,7 +62,7 @@ form_pass.addEventListener("submit", function (event) {
 
         alert("Contraseña actualizada exitosamente.");
 
-        form_pass.reset();
+        sessionStorage.clear()
         window.location.href = "login.html";
     }
 

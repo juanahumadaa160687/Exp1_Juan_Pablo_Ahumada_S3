@@ -278,3 +278,7 @@ th td{
 th td{
     color: var(--cffy-theme-primary-a40);
 }
+
+#icono_carro{
+    font-size: 15pt;
+}

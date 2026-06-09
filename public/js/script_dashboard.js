@@ -1,5 +1,8 @@
 let product_form = document.getElementById('product_form');
 
+let admin_user = sessionStorage.getItem("role") || null;
+
+
 product_form.addEventListener('submit', function (event) {
     event.preventDefault();
 
@@ -85,72 +88,155 @@ function deleteProd(id) {
     alert("Producto eliminado correctamente");
 
     window.location.reload();
-
 }
 
-let admin_form = document.getElementById('admin_form');
 
-let email_feedback = document.getElementById('email_feedback');
-let username_feedback = document.getElementById('username_feedback');
-let password_feedback = document.getElementById('password_feedback');
-let confirm_password_feedback = document.getElementById('confirm_password_feedback');
+let adminForm = document.getElementById("admin_form");
 
-admin_form.addEventListener('submit', function (event) {
+let nameFeed = document.getElementById("name_feedback");
+let lastnameFeed = document.getElementById("lastname_feedback");
+let userNameFeed = document.getElementById("userName_feedback");
+let correo_feedback = document.getElementById("correo_feedback");
+let birthday_feedback = document.getElementById("birthday_feedback");
+let contrasena_feedback = document.getElementById("contrasena_feedback");
+let contrasena_confirmation_feedback = document.getElementById("confirmContrasena_feedback");
+
+
+adminForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    let email = document.getElementById('emailInput').value.trim();
-    let username = document.getElementById('usernameInput').value.trim();
-    let password = document.getElementById('passwordInput').value.trim();
-    let confirmPassword = document.getElementById('confirmPasswordInput').value.trim();
+    let name = document.getElementById("name").value.trim();
+    let lastname = document.getElementById("lastname").value.trim();
+    let userName = document.getElementById("userName").value.trim();
+    let correo = document.getElementById("correo").value.trim();
+    let birthday = document.getElementById("birthday").value.trim();
+    let address = document.getElementById("address").value.trim();
+    let contrasena = document.getElementById("contrasena").value.trim();
+    let confirmacion_contrasena = document.getElementById("confirmContrasena").value.trim();
+    let rol = document.getElementById("rol").value.trim();
 
-    if (password !== confirmPassword) {
-        confirm_password_feedback.style.display = 'block';
-        confirm_password_feedback.innerText = 'Las contraseñas no coinciden';
+    let users = JSON.parse(localStorage.getItem('productos')) || [];
 
-        setTimeout(function () {
-            confirm_password_feedback.style.display = 'none';
-        }, 3500)
+    let user_username_exists = users.find(p => p.username == userName);
+
+    let user_email_exists = users.find(p => p.email == correo);
+
+    if (name === "") {
+        nameFeed.innerText = "El nombre no puede estar vacío.";
+        nameFeed.style.display = "block";
+
+        setTimeout(() => {
+            nameFeed.style.display = "none";
+        }, 3500);
     }
-    else if (email === '') {
-        email_feedback.style.display = 'block';
-        email_feedback.innerText = 'E-mail no puede estar vacío';
 
-        setTimeout(function () {
-            email_feedback.style.display = 'none';
+    else if (lastname === "") {
+        lastnameFeed.innerText = "El apellido no puede estar vacío.";
+        lastnameFeed.style.display = "block";
 
-        }, 3500)
+        setTimeout(() => {
+            lastnameFeed.style.display = "none";
+        }, 3500);
     }
-    else if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) || password === '') {
-        password_feedback.style.display = 'block';
-        password_feedback.innerText = 'La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales (@$!%*?&)';
+    else if (userName === "") {
+        userNameFeed.innerText = "El nombre de usuario no puede estar vacío";
+        userNameFeed.style.display = "block";
 
-        setTimeout(function () {
-            email_feedback.style.display = 'none';
-        }, 3500)
+        setTimeout(() => {
+            userNameFeed.style.display = "none";
+        }, 3500);
     }
-    else if (username === '') {
-        username_feedback.style.display = 'block';
-        username_feedback.innerText = 'El nombre de usuario no puede estar vacío';
-
-        setTimeout(function () {
-            username_feedback.style.display = 'none';
-        }, 3500)
+    else if (user_username_exists) {
+        userNameFeed.innerText = "El nombre de usuario ya existe. Por favor, elige otro.";
+        userNameFeed.style.display = "block";
+        setTimeout(() => {
+            userNameFeed.style.display = "none";
+        }, 3500);
+    }
+    else if (correo === "") {
+        correo_feedback.innerText = "El email no valido";
+        correo_feedback.style.display = "block";
+        setTimeout(() => {
+            correo_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (!correo.includes("@") || !correo.includes(".")) {
+        correo_feedback.innerText = "El email no es válido.";
+        correo_feedback.style.display = "block";
+        setTimeout(() => {
+            correo_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (user_email_exists) {
+        correo_feedback.innerText = "El email ya está registrado. Por favor, elige otro.";
+        correo_feedback.style.display = "block";
+        setTimeout(() => {
+            correo_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (birthday=== "") {
+        birthday_feedback.innerText = "La fecha de nacimiento no puede estar vacía.";
+        birthday_feedback.style.display = "block";
+        setTimeout(() => {
+            birthday_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (new Date(birthday) > new Date()) {
+        birthday_feedback.innerText = "La fecha de nacimiento no puede ser en el futuro.";
+        birthday_feedback.style.display = "block";
+        setTimeout(() => {
+            birthday_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (new Date().getFullYear() - new Date(birthday).getFullYear() < 18) {
+        birthday_feedback.innerText = "Debes tener al menos 18 años para registrarte.";
+        birthday_feedback.style.display = "block";
+        setTimeout(() => {
+            birthday_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (contrasena === "" || !contrasena.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+        contrasena_feedback.innerText = "La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y caracteres especiales.";
+        contrasena_feedback.style.display = "block";
+        setTimeout(() => {
+            password_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (confirmacion_contrasena === "") {
+        contrasena_confirmation_feedback.innerText = "La confirmación de contraseña no puede estar vacía.";
+        contrasena_confirmation_feedback.style.display = "block";
+        setTimeout(() => {
+            contrasena_confirmation_feedback.style.display = "none";
+        }, 3500);
+    }
+    else if (contrasena !== confirmacion_contrasena) {
+        contrasena_feedback.innerText = "Las contraseñas no coinciden.";
+        contrasena_feedback.style.display = "block";
+        setTimeout(() => {
+            contrasena_feedback.style.display = "none";
+        }, 3500);
     }
     else {
-        let admins = JSON.parse(localStorage.getItem('admins')) || [];
 
-        let admin = {
-            email: email,
-            username: username,
-            password: password
+        let user_admin = {
+            nombre: name,
+            apellido: lastname,
+            username: userName,
+            email: correo,
+            fecha_nacimiento: birthday,
+            direccion: address,
+            password: contrasena,
+            role: rol
         }
 
-        admins.push(admin);
-        localStorage.setItem('admins', JSON.stringify(admins));
+        let users = JSON.parse(localStorage.getItem("users")) || [];
 
-        alert('Administrador agregado correctamente');
+        users.push(user_admin);
+
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Usuario administrador agregado correctamente");
 
         window.location.href = "/ludus_arcanus_web/login.html";
-
     }
-});
+})

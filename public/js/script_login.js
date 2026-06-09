@@ -1,6 +1,13 @@
-let form = document.getElementById("login");
+let form = document.getElementById("login_form");
 let feedback_username = document.getElementById("feedback_username");
 let feedback_password = document.getElementById("feedback_password");
+
+let user_signed_in = sessionStorage.getItem("username") || null;
+
+if (user_signed_in !== null) {
+    alert("Ya has iniciado sesión. Serás redirigido a la página principal.");
+    window.location.href = "/ludus_arcanus_web/index.html";
+}
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -15,8 +22,6 @@ form.addEventListener("submit", (e) => {
     let user_username = user.username;
     let user_password = user.password;
 
-    console.log(user);
-
     if (user_username === null) {
         feedback_username.innerHTML = "El usuario no existe. Intenta nuevamente o registrate";
         feedback_username.style.display = "block";
@@ -28,10 +33,6 @@ form.addEventListener("submit", (e) => {
 
     else {
         let user_role = user.role;
-
-        console.log(user_role);
-        console.log(user_username);
-        console.log(user_password);
 
         if (username === user_username && password === user_password) {
 

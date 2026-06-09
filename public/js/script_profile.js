@@ -13,22 +13,22 @@ let usuarios = JSON.parse(localStorage.getItem("users")) || [];
 let usuario = usuarios.find(u => u.username === sessionStorage.username);
 
 if (usuario != null) {
-    profile_nombre.value = usuario.nombre;
-    profile_apellido.value = usuario.apellido;
-    profile_username.value = usuario.username;
-    profile_email.value = usuario.email;
-    profile_direccion.value = usuario.direccion;
+    profile_nombre.innerText = usuario.nombre;
+    profile_apellido.innerText = usuario.apellido;
+    profile_username.innerText = usuario.username;
+    profile_email.innerText = usuario.email;
+    profile_direccion.innerText = usuario.direccion;
 
     let fecha_nac = new Date(usuario.fecha_nacimiento);
     let dia = String(fecha_nac.getDate()).padStart(2, '0');
     let mes = String(fecha_nac.getMonth() + 1).padStart(2, '0');
     let anio = fecha_nac.getFullYear();
-    profile_fecha_nacimiento.value = `${dia}-${mes}-${anio}`;
+    profile_fecha_nacimiento.innerText = `${dia}-${mes}-${anio}`;
 }
 
 b_borrar.addEventListener("click", () => {
 
-    usuarios.remove(usuario);
+    usuarios.splice(usuarios.indexOf(usuario), 1);
 
     localStorage.setItem("users", JSON.stringify(usuarios));
 

@@ -52,11 +52,12 @@ localStorage.getItem('productos') && JSON.parse(localStorage.getItem('productos'
             carrito.push(item);
             alert('Producto agregado al carrito');
             localStorage.setItem('carrito', JSON.stringify(carrito));
+            window.location.reload();
+
         })
         div_body.appendChild(button);
 
         div_destacados.appendChild(div_producto);
 
     }
-
 });

@@ -8,6 +8,15 @@ let fecha_nacimiento_feedback = document.getElementById("fecha_nacimiento_feedba
 let password_feedback = document.getElementById("password_feedback");
 let password_confirmation = document.getElementById("confirmPassword_feedback");
 
+let user_signIn = sessionStorage.getItem("username") || null;
+
+if (user_signIn !== null) {
+    alert("Ya has iniciado sesión. Serás redirigido a la página principal.");
+    window.location.href = "/ludus_arcanus_web/index.html";
+}
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
 signUpForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -21,9 +30,8 @@ signUpForm.addEventListener("submit", function (event) {
     let confirmacion = document.getElementById("confirmPassword").value.trim();
     let role = document.getElementById("role").value.trim();
 
-    let user = JSON.parse(localStorage.getItem("user " + username)) || {};
-
-    console.log(user);
+    let username_exists = users.find(x => x.username === username);
+    let email_exists = users.find(x => x.username === email);
 
     if (nombre === "") {
         nombre_feedback.innerText = "El nombre no puede estar vacío.";
@@ -50,7 +58,7 @@ signUpForm.addEventListener("submit", function (event) {
             nombre_feedback.style.display = "none";
         }, 3500);
     }
-    else if (username === user.username) {
+    else if (username_exists) {
         username_feedback.innerText = "El nombre de usuario ya existe. Por favor, elige otro.";
         username_feedback.style.display = "block";
         setTimeout(() => {
@@ -71,7 +79,7 @@ signUpForm.addEventListener("submit", function (event) {
             email_feedback.style.display = "none";
         }, 3500);
     }
-    else if (email === user.email) {
+    else if (email_exists) {
         email_feedback.innerText = "El email ya está registrado. Por favor, elige otro.";
         email_feedback.style.display = "block";
         setTimeout(() => {
